@@ -81,9 +81,9 @@ class Backtester:
                     self.data.iloc[i, cash_idx] = self.data['cash'].iloc[i - 1]
 
             # Update the total portfolio value (cash + holdings)
-            total_value = self.data.iloc[i, cash_idx] + self.data.iloc[i, holdings_idx]
-            # Convert to float explicitly before assignment
-            self.data.iloc[i, portfolio_idx] = float(total_value)
+            # Explicitly convert each value to float to ensure they are scalars
+            total_value = float(self.data.iloc[i, cash_idx]) + float(self.data.iloc[i, holdings_idx])
+            self.data.iloc[i, portfolio_idx] = total_value
 
         return self.data
 
