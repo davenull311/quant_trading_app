@@ -48,7 +48,7 @@ class Backtester:
         for i in range(1, len(self.data)):
             # Retrieve the trade signal (position change) using integer indexing
             pos_change = self.data['positions'].iloc[i]
-            
+
             if pos_change == 1:
                 # BUY signal: Use available cash to purchase as many shares as possible
                 buy_price = self.data['Open'].iloc[i]  # Assume buying at the opening price
@@ -81,9 +81,9 @@ class Backtester:
                     self.data.iloc[i, cash_idx] = self.data['cash'].iloc[i - 1]
 
             # Update the total portfolio value (cash + holdings)
-            self.data.iloc[i, portfolio_idx] = (
-                self.data.iloc[i, cash_idx] + self.data.iloc[i, holdings_idx]
-            )
+            total_value = self.data.iloc[i, cash_idx] + self.data.iloc[i, holdings_idx]
+            # Convert to float explicitly before assignment
+            self.data.iloc[i, portfolio_idx] = float(total_value)
 
         return self.data
 
