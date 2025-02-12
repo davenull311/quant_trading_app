@@ -69,12 +69,12 @@ def main():
     # STEP 7: Simulated Order Execution
     # ===============================
     execution_engine = ExecutionEngine()
-    # Create a sample order (this is for demonstration; in a live system, orders would be dynamic)
+    # Create a sample order (for demonstration; in a live system, orders would be dynamic)
     sample_order = {
         'ticker': ticker,
         'action': 'BUY',
         'quantity': 10,
-        'price': results['Open'].iloc[-1]  # Use the last available open price as an example
+        'price': float(results['Open'].iloc[-1])  # Convert the last available open price to a float
     }
     execution_engine.execute_order(sample_order)
 

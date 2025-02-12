@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 def to_scalar(x):
     """
     Helper function to convert a value to a plain Python scalar.
-    
+
     If x is a single-element Series or a NumPy scalar, this function returns the scalar value.
     Otherwise, it returns x unchanged.
     """
@@ -85,8 +85,7 @@ class Backtester:
 
             else:
                 # No trade executed; update holdings value if in a position
-                # Ensure that position is a float so that the comparison is unambiguous
-                if float(position) != 0:
+                if to_scalar(position) != 0:
                     self.data.iloc[i, holdings_idx] = position * self.data['Close'].iloc[i]
                     # Cash remains the same as the previous time step
                     self.data.iloc[i, cash_idx] = self.data['cash'].iloc[i - 1]
